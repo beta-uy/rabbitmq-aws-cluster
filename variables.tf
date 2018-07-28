@@ -12,10 +12,20 @@ variable "subnet_ids" {
 variable "ssh_security_group_ids" {
   description = "Security groups which should have SSH access to nodes."
   type = "list"
+  default = []
 }
 variable "elb_security_group_ids" {
   description = "Security groups which should have access to ELB (amqp + http ports)."
   type = "list"
+  default = []
+}
+variable "ssh_cidr_blocks" {
+  description = "CIDR blocks which should have SSH access to nodes."
+  default = []
+}
+variable "elb_cidr_blocks" {
+  description = "CIDR blocks which should have access to ELB (amqp + http ports)."
+  default = []
 }
 variable "admin_password" {
   description = "Password for 'admin' user"

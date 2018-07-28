@@ -87,6 +87,20 @@ resource "aws_security_group" "rabbitmq_elb" {
     security_groups = ["${var.elb_security_group_ids}"]
   }
 
+  ingress {
+    protocol        = "tcp"
+    from_port       = 5672
+    to_port         = 5672
+    cidr_blocks     = ["${var.elb_cidr_blocks}"]
+  }
+
+  ingress {
+    protocol        = "tcp"
+    from_port       = 80
+    to_port         = 80
+    cidr_blocks     = ["${var.elb_cidr_blocks}"]
+  }
+
   egress {
     protocol    = "-1"
     from_port   = 0
@@ -130,6 +144,13 @@ resource "aws_security_group" "rabbitmq_nodes" {
     from_port       = 22
     to_port         = 22
     security_groups = ["${var.ssh_security_group_ids}"]
+  }
+
+  ingress {
+    protocol        = "tcp"
+    from_port       = 22
+    to_port         = 22
+    cidr_blocks     = ["${var.ssh_cidr_blocks}"]
   }
 
   egress {
